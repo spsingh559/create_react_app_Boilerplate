@@ -22,6 +22,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -40,11 +41,13 @@ const styles = theme => ({
     marginTop: 19,
   },
 });
+
+const obj={};
 class Login extends Component {
 
   state={
-    name: '',
-    pwd :""
+    userId: '',
+    password :""
   }
 
   handleChange = name => event => {
@@ -57,11 +60,29 @@ class Login extends Component {
   submit=()=>{
     const { router } = this.props;
     router.push('/')
+    let obj={
+      userId:this.state.userId,
+      password:this.state.password
+    }
+
+    console.log('data rec', obj);
 
   }
 
+  handleChangePassword =(event)=>{
+    this.setState({password:event.target.value});
+  }
+
+  handleChangeUserId =(event)=>{
+    this.setState({userId:event.target.value});
+  }
+
+  
+
   render() {
     const { classes } = this.props;
+console.log(this.state.userId);
+
     return (
       <div className="Loginbackground">
      <Container>
@@ -77,13 +98,15 @@ class Login extends Component {
      <center>
 
    
-    <Paper elevation={5} style={{height:"300px", width:"300px", marginTop:"100px"}}>
+    <Paper elevation={5} style={{height:"400px", width:"500px", marginTop:"100px"}}>
     <h3> Offset Authentication System </h3>
     <center>
     <form className={classes.container} noValidate autoComplete="off">
     <TextField
           id="standard-dense"
-          label="User Name"
+          label="User Id"
+          value={this.state.userId}
+          onChange={this.handleChangeUserId}
           className={classNames(classes.textField, classes.dense)}
           margin="dense"
         />
@@ -92,6 +115,8 @@ class Login extends Component {
 <TextField
           id="standard-password-input"
           label="Password"
+          value={this.state.password}
+          onChange={this.handleChangePassword}
           className={classes.textField}
           type="password"
           autoComplete="current-password"
@@ -122,4 +147,5 @@ Login.propTypes = {
   classes: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired
 };
+
 export default withStyles(styles)(Login);

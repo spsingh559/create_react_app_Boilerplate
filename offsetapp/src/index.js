@@ -13,7 +13,9 @@ ReactDOM.render(
     <Route path="/login" component={Login} />
     
     <Route path="/" component={ParentComponent}>
+    
     <Route path="/dashboard" component={Home} />
+    
     <IndexRoute component={Home} />
     </Route>
     </Router>, 
