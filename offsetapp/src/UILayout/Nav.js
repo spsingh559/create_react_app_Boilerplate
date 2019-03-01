@@ -27,6 +27,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import {Link} from 'react-router';
+import {Row,Col} from 'react-bootstrap';
+import Image from 'react-bootstrap/Image'
+
 
 const styles = theme => ({
   root: {
@@ -137,7 +140,14 @@ class Nav extends React.Component {
     this.setState({ open: false });
   };
 
+  handleLogout=()=>{
+    sessionStorage.removeItem('userLoginDetails');
+  }
+
   render() {
+     // sessionStorage.removeItem('userLoginDetails');
+     let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
+     console.log(loginData);
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
@@ -164,14 +174,14 @@ class Nav extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMobileMenuClose}>
+        {/* <MenuItem onClick={this.handleMobileMenuClose}>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <MailIcon />
             </Badge>
           </IconButton>
           <p>Messages</p>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={this.handleMobileMenuClose}>
           <IconButton color="inherit">
             <Badge badgeContent={11} color="secondary">
@@ -189,14 +199,19 @@ class Nav extends React.Component {
       </Menu>
     );
     let count =3;
-
+    console.log('inside ', loginData.userName);
     const sideList = (
-        <div className={classes.list}>
+        <div>  
+        <img src="./images/user.png" height="50px" width="50px" />
+        <br />
+        {"Hello " +" " + loginData.userName}
+         <div  className={classes.list}>
+         {loginData.dept=="boeing"?
         <List>
           <ListItem onTouchTap={this.handleClose}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
-          <Link to="/"> Home </Link>
+          <Link to="/boeing"> Home </Link>
         </ListItem>
 
         <ListItem onTouchTap={this.handleClose}>
@@ -214,7 +229,7 @@ class Nav extends React.Component {
         <ListItem onTouchTap={this.handleClose}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
-          <Link to="/"> Create Po </Link>
+          <Link to="/boeing/create"> Create Po </Link>
         </ListItem>
 
         <ListItem onTouchTap={this.handleClose}>
@@ -223,13 +238,44 @@ class Nav extends React.Component {
           <Link to="/"> Pending PO </Link>
         </ListItem>
         <Divider />
-        <ListItem onTouchTap={this.handleClose}>
+        <ListItem onTouchTap={this.handleLogout}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
-          <Link to="/login"> Logout </Link>
+          <Link to="/login" onClick={this.handleLogout}> Logout </Link>
         </ListItem>
 
-       </List>
+       </List>:
+               <List>
+               <ListItem onTouchTap={this.handleClose}>
+               <ListItemIcon><InboxIcon />
+               </ListItemIcon>
+               <Link to="/supplier"> Home </Link>
+             </ListItem>
+     
+            
+             <ListItem onTouchTap={this.handleClose}>
+               <ListItemIcon><InboxIcon />
+               </ListItemIcon>
+               <Link to="/"> Profile </Link>
+             </ListItem>
+     
+             <ListItem onTouchTap={this.handleClose}>
+               <ListItemIcon><InboxIcon />
+               </ListItemIcon>
+               <Link to="/viewpo"> View PO </Link>
+             </ListItem>
+     
+           
+             <Divider />
+             <ListItem onTouchTap={this.handleLogout}>
+               <ListItemIcon><InboxIcon />
+               </ListItemIcon>
+               <Link to="/login"> Logout </Link>
+             </ListItem>
+     
+            </List>
+         }
+        </div>
         </div>
       );
 
@@ -261,11 +307,11 @@ let name ="DC";
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
+              {/* <IconButton color="inherit">
                 <Badge badgeContent={count} color="secondary">
                   <MailIcon />
                 </Badge>
-              </IconButton>
+              </IconButton> */}
               <IconButton color="inherit">
                 <Badge badgeContent={3} color="secondary">
                   <NotificationsIcon />

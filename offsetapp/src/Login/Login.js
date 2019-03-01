@@ -22,6 +22,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router';
+import loginData from './loginData';
 
 const styles = theme => ({
   root: {
@@ -56,14 +57,34 @@ class Login extends Component {
     });
   };
 
+  componentDidMount=()=>{
+    let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
+    console.log('loginData in login page', loginData);
+  }
+
   
   submit=()=>{
     const { router } = this.props;
-    router.push('/')
+    // router.push('/')
     let obj={
       userId:this.state.userId,
       password:this.state.password
     }
+
+    console.log('obj', obj);
+
+    loginData.forEach((data)=>{
+      console.log()
+      if(data.userId==obj.userId && data.password==obj.password){
+        alert('login success')
+        sessionStorage.setItem('userLoginDetails',JSON.stringify({userId:data.userId,userName:data.userName,role:data.role,dept:data.dept}));
+        if(data.dept=="boeing"){
+        router.push('/boeing')
+        }else{
+          router.push('/supplier')
+        }
+      }
+    })
 
     console.log('data rec', obj);
 
@@ -85,7 +106,7 @@ console.log(this.state.userId);
 
     return (
       <div className="Loginbackground">
-     <Container>
+   
      <AppBar position="static">
         
         <Toolbar>
@@ -94,7 +115,7 @@ console.log(this.state.userId);
           </Typography>
         </Toolbar>
       </AppBar>
-   <Row>
+  
      <center>
 
    
@@ -134,9 +155,8 @@ console.log(this.state.userId);
         </Paper>
     
     </center>
-    </Row>
-   
-    </Container>
+  
+  
       </div>
      
     );
