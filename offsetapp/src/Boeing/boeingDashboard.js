@@ -14,6 +14,7 @@ import PendingPO from './POCount/pendingPO';
 import CompletedPO from './POCount/completedPO';
 import POTable from './POTable/poTable';
 import Notification from './Notification/notification';
+import YearSlider from '../NewDashboard/YearSlider';
 
 const styles = theme => ({
     root: {
@@ -48,6 +49,11 @@ class Home extends Component {
             <div style={{ marginTop: "50px"}}>
 
                 <Container>
+                    <Row>
+                        <Col md={12}>
+                        <YearSlider />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md={8}>
                             <Row>

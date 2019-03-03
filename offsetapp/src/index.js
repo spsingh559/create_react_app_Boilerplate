@@ -7,6 +7,7 @@ import ParentComponent from './UILayout/Parent';
 import Supplier from './Supplier/supplierDashboard';
 import CreatePO from './Boeing/CreatePO/createPO';
 import * as serviceWorker from './serviceWorker';
+import NewDashboard from './NewDashboard/NewDashboard';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 
@@ -15,6 +16,7 @@ ReactDOM.render(
     <Route path="/login" component={Login} />
     
     <Route path="/boeing" component={ParentComponent}>
+    {/* <Route path="/newDashboard" component={NewDashboard} /> */}
     <Route path="/supplier" component={Supplier} />
     <Route path="/boeing/create" component={CreatePO}/>
     <IndexRoute component={Boeing} />

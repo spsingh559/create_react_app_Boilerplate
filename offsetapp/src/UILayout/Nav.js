@@ -166,40 +166,7 @@ class Nav extends React.Component {
       </Menu>
     );
 
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMobileMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        {/* <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem> */}
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
-          <IconButton color="inherit">
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem>
-      </Menu>
-    );
-    let count =3;
-    console.log('inside ', loginData.userName);
+       console.log('inside ', loginData.userName);
     const sideList = (
         <div>  
         <img src="./images/user.png" height="50px" width="50px" />
@@ -214,11 +181,7 @@ class Nav extends React.Component {
           <Link to="/boeing"> Home </Link>
         </ListItem>
 
-        <ListItem onTouchTap={this.handleClose}>
-          <ListItemIcon><InboxIcon />
-          </ListItemIcon>
-          <Link to="/"> Dashboard </Link>
-        </ListItem>
+        
 
         <ListItem onTouchTap={this.handleClose}>
           <ListItemIcon><InboxIcon />
@@ -307,16 +270,12 @@ let name ="DC";
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              {"Hello " + loginData.userName}
               {/* <IconButton color="inherit">
-                <Badge badgeContent={count} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton> */}
-              <IconButton color="inherit">
                 <Badge badgeContent={3} color="secondary">
                   <NotificationsIcon />
                 </Badge>
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"
@@ -342,7 +301,6 @@ let name ="DC";
           </div>
         </Drawer>
         {renderMenu}
-        {renderMobileMenu}
 
       </div>
     );
