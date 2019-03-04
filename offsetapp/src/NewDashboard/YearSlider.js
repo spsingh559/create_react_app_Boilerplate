@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import Button from '@material-ui/core/Button';
-import ButtonBB from 'react-bootstrap/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
-import {Container, Row, Col,Pagination} from 'react-bootstrap';
+import {Pagination} from 'react-bootstrap';
 
 import EachPage from './EachPage';
 //  Imported Component
@@ -38,7 +33,8 @@ class YearSlider extends Component {
         leftFlag:false,
         rightFlag:true,
         nextPointer:0,
-        prevPointer:0
+        prevPointer:0,
+        activeYear:''
     }
 
     componentDidMount=()=>{
@@ -52,6 +48,7 @@ class YearSlider extends Component {
             nextPointer:10,
             prevPointer:0
         })
+
     }
    
     prev=()=>{
@@ -70,8 +67,14 @@ class YearSlider extends Component {
             nextPointer:this.state.nextPointer+10,
             prevPointer:this.state.prevPointer+10
         })
+        
+       
+        }
 
-    }
+        sendYear=(year)=>{
+            this.props.sendYear(year);
+            this.setState({activeYear:year})
+        }
     render() {
         const {classes} = this.props;
 
@@ -84,6 +87,8 @@ return(
     key={y}
     year={y}
    index={i}
+   sendYear={this.sendYear}
+   activeYear={this.state.activeYear}
     />
 )
      })
@@ -99,11 +104,11 @@ return(
 
 <Pagination size="lg">
 
-  {this.state.prevPointer==0? <Pagination.Prev disabled={true}/>:<Pagination.Prev onClick={this.prev}/>}
+  {this.state.prevPointer===0? <Pagination.Prev disabled={true}/>:<Pagination.Prev onClick={this.prev}/>}
  
  {newData}
 
- {this.state.nextPointer==30? <Pagination.Next disabled={true}/>:<Pagination.Next onClick={this.next}/>}
+ {this.state.nextPointer===30? <Pagination.Next disabled={true}/>:<Pagination.Next onClick={this.next}/>}
   </Pagination>
   
                            </div>

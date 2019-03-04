@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -13,22 +12,17 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import {Link} from 'react-router';
-import {Row,Col} from 'react-bootstrap';
-import Image from 'react-bootstrap/Image'
+
 
 
 const styles = theme => ({
@@ -175,7 +169,7 @@ class Nav extends React.Component {
          <div  className={classes.list}>
          {loginData.dept=="boeing"?
         <List>
-          <ListItem onTouchTap={this.handleClose}>
+          <ListItem onClick={this.handleClose}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
           <Link to="/boeing"> Home </Link>
@@ -183,25 +177,21 @@ class Nav extends React.Component {
 
         
 
-        <ListItem onTouchTap={this.handleClose}>
+        <ListItem onClick={this.handleClose}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
           <Link to="/"> Profile </Link>
         </ListItem>
 
-        <ListItem onTouchTap={this.handleClose}>
-          <ListItemIcon><InboxIcon />
-          </ListItemIcon>
-          <Link to="/boeing/create"> Create Po </Link>
-        </ListItem>
+       
 
-        <ListItem onTouchTap={this.handleClose}>
+        <ListItem onClick={this.handleClose}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
           <Link to="/"> Pending PO </Link>
         </ListItem>
         <Divider />
-        <ListItem onTouchTap={this.handleLogout}>
+        <ListItem onClick={this.handleLogout}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
           <Link to="/login" onClick={this.handleLogout}> Logout </Link>
@@ -209,20 +199,20 @@ class Nav extends React.Component {
 
        </List>:
                <List>
-               <ListItem onTouchTap={this.handleClose}>
+               <ListItem onClick={this.handleClose}>
                <ListItemIcon><InboxIcon />
                </ListItemIcon>
                <Link to="/supplier"> Home </Link>
              </ListItem>
      
             
-             <ListItem onTouchTap={this.handleClose}>
+             <ListItem onClick={this.handleClose}>
                <ListItemIcon><InboxIcon />
                </ListItemIcon>
                <Link to="/"> Profile </Link>
              </ListItem>
      
-             <ListItem onTouchTap={this.handleClose}>
+             <ListItem onClick={this.handleClose}>
                <ListItemIcon><InboxIcon />
                </ListItemIcon>
                <Link to="/viewpo"> View PO </Link>
@@ -230,7 +220,7 @@ class Nav extends React.Component {
      
            
              <Divider />
-             <ListItem onTouchTap={this.handleLogout}>
+             <ListItem onClick={this.handleLogout}>
                <ListItemIcon><InboxIcon />
                </ListItemIcon>
                <Link to="/login"> Logout </Link>

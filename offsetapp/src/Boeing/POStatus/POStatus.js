@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TableData from './tableData';
-import TableL1 from './tableL1';
+import TableData from '../POTable/tableData';
+import StatusTableL1 from './StatusTableL1';
 const styles = theme => ({
     root: {
       ...theme.mixins.gutters(),
@@ -17,7 +17,7 @@ class POTable extends Component {
         const {classes} = this.props;
         return(
             
-            <TableL1 data={TableData}/>
+            <StatusTableL1 data={TableData}/>
         )
     
     }

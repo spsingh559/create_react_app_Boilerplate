@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TableL2 from './TableL2';
+import StatusTableL2 from './StatusTableL2';
 import {Table} from 'react-bootstrap';
 const styles = theme => ({
     root: {
@@ -14,7 +14,7 @@ const styles = theme => ({
       },
   });
 
-class TableL1 extends Component {
+class StatusTableL1 extends Component {
     render()    {
 
         const {classes} = this.props;
@@ -22,7 +22,7 @@ class TableL1 extends Component {
         console.log('data reached to first child', this.props.data);
         let newData = this.props.data.map((data,i)=>{
             return(
-                <TableL2
+                <StatusTableL2
                 key={i}
                 data={data}
                 />
@@ -30,17 +30,16 @@ class TableL1 extends Component {
         })
 
         return(
-
 <Table striped bordered hover responsive className={classes.table}> 
 <thead style={{backgroundColor:"#ccddff"}}>
   <tr>
-    <th>PO Number</th>
-    <th>App Id</th>
-    <th>Status</th>
-    <th>Deficit</th>
-    <th>Assigned To</th>
-    <th>PO IVA</th>
-    <th>Action</th>
+  <th>PO Number</th>
+    <th>Initiated</th>
+    <th>Detail Entered</th>
+    <th>Verified</th>
+    <th>Accepted</th>
+    <th>Archieved</th>
+    <th>End</th>
   </tr>
 </thead>
 <tbody>
@@ -52,10 +51,10 @@ class TableL1 extends Component {
     }
 }
 
-TableL1.propTypes = {
+StatusTableL1.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
   
-  export default withStyles(styles)(TableL1);
+  export default withStyles(styles)(StatusTableL1);
 

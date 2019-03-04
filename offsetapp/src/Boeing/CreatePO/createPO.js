@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import ButtonBB from 'react-bootstrap/Button';
-
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -14,10 +11,6 @@ import {
     Container,
     Row,
     Col,
-    Form,
-    FormGroup,
-    FormLabel,
-    InputGroup
 } from 'react-bootstrap';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -25,8 +18,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import Fab from '@material-ui/core/Fab';
@@ -64,7 +57,9 @@ class CreatePO extends Component {
         vendor: '',
         open: false,
         poNumber:'',
-        poOffsetPrice:0
+        poOffsetPrice:0,
+        poIVA:0,
+        poApplicableYear:this.props.params.year
     };
 
     handleDateChange = e => {
@@ -91,6 +86,14 @@ class CreatePO extends Component {
         this.setState({open: true});
     };
 
+    handleChangepoIVA=(event)=>{
+        this.setState({poIVA: event.target.value}); 
+    }
+
+    handlepoApplicableYear=(event)=>{
+        this.setState({poApplicableYear:event.target.value})
+    }
+
     submit=()=>{
       let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
 alert('form submitted successfully');
@@ -99,6 +102,7 @@ alert('form submitted successfully');
         poDate:this.state.selectedDate,
         poVendor:this.state.vendor,
         poOffsetPrice:this.state.poOffsetPrice,
+        poIVA:this.state.poIVA,
         createBy:loginData.userId,
         timeStamp:new Date()
       }
@@ -109,6 +113,7 @@ alert('form submitted successfully');
 
     {
         const {classes} = this.props;
+        console.log('year from routing is', this.props.params.year);
         return (
             <div>
 
@@ -130,16 +135,14 @@ alert('form submitted successfully');
           height: "100%",
           zIndex: "-10",
           backgroundColor:"#eeeeee"}}>
-                <div style={{
-                    paddingTop: "50px"
-                }}>
+                <div>
                     <Container>
                         <Paper
                             elevation={1}
                             style={{
-                            height: "500px",
+                            height: "400px",
                             width: "700px",
-                            marginTop: "100px"
+                            marginTop: "30px"
                         }}>
                         <center>
                             <h2>Enter PO Details</h2>
@@ -218,13 +221,51 @@ alert('form submitted successfully');
                                     </Col>
                                     <Col md={4}></Col>
                                 </Row>
+                                <Row>
+                                    <Col md={4}>
+                                    <TextField id="standard-dense" label="Expected IVA"
+                                         value={this.state.poIVA}
+                                     onChange={this.handleChangepoIVA}
+                                    type="number" className={classNames(classes.textField, classes.dense)} margin="dense" InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <AttachMoney/>
+                                                </InputAdornment>
+                                            )
+                                        }}/>
+                                    </Col>
+                                    <Col md={4}>
+                                    <TextField id="standard-dense" label="PO Applicable Year"
+                                         value={this.state.poApplicableYear}
+                                     onChange={this.handlepoApplicableYear}
+                                    type="number" className={classNames(classes.textField, classes.dense)} margin="dense" InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <CalendarToday />
+                                            </InputAdornment>
+                                        )
+                                        }}/>
+                                    </Col>
+                                    <Col md={4}>
+                                    </Col>
+                                </Row>
                              
-                                    <center>
-                                    <Fab variant="extended" color="primary" aria-label="Add" className={classes.margin} onClick={this.submit}>
+                                    <Row>
+                                        <Col>
+                                        <Fab variant="extended" color="primary" aria-label="Add" className={classes.margin} onClick={this.submit}>
+          <SaveIcon className={classes.extendedIcon} />
+      Save
+        </Fab>
+                                        </Col>
+                                        <Col>
+                                        <Fab variant="extended" color="primary" aria-label="Add" className={classes.margin} onClick={this.submit}>
           <AddIcon className={classes.extendedIcon} />
       Submit
         </Fab>
-        </center>
+                                        </Col>
+                                    </Row>
+                                    
+        
                                     
                            
 

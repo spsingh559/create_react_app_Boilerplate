@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import Button from '@material-ui/core/Button';
-import ButtonBB from 'react-bootstrap/Button';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Container, Row, Col} from 'react-bootstrap';
-
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 //  Imported Component
 import CreatedPO from './POCount/createdPO';
 import PendingPO from './POCount/pendingPO';
@@ -15,6 +12,7 @@ import CompletedPO from './POCount/completedPO';
 import POTable from './POTable/poTable';
 import Notification from './Notification/notification';
 import YearSlider from '../NewDashboard/YearSlider';
+import POStatus from './POStatus/POStatus';
 
 const styles = theme => ({
     root: {
@@ -36,24 +34,48 @@ const styles = theme => ({
 
 class Home extends Component {
 
+    state={
+        viewDash:false,
+        selectedYear:''
+    }
+
+    sendYear=(year)=>{
+        this.setState({viewDash:true});
+        this.setState({selectedYear:year})
+        
+    }
+
+    createNewPo=()=>{
+        const { router } = this.props;
+        router.push('/boeing/createPo/'+this.state.selectedYear);
+    }
+
     render() {
         const {classes} = this.props;
         let createPO = 10;
         return (
-          <div style={{position: "fixed",
+          <div style={{
+              minHeight:"700px",
           width: "100%",
           height: "100%",
-          zIndex: "-10",
           backgroundColor:"#eeeeee"}}>
 
-            <div style={{ marginTop: "50px"}}>
+            <div style={{ marginTop: "10px"}}>
 
                 <Container>
                     <Row>
                         <Col md={12}>
-                        <YearSlider />
+                        <YearSlider 
+                        sendYear={this.sendYear}
+                        />
                         </Col>
                     </Row>
+                    {this.state.viewDash==false?
+                    <Row>
+                        <Col md={12}>
+                       <center> <h2> Select year to view Dashboard</h2></center>
+                        </Col>
+                    </Row>:
                     <Row>
                         <Col md={8}>
                             <Row>
@@ -82,13 +104,22 @@ class Home extends Component {
                                 </Paper>
                             </Row>
 
-                            {/* <Row>
-                                Blockchain View
-                            </Row> */}
+                            <Row style={{marginTop:"20px"}}>
+                            <Paper elevation={1}>
+                            <POStatus />
+                                </Paper>
+                               
+                            </Row>
                         </Col>
 
                         <Col md={4}>
                             <Row>
+                            <Fab color="primary" aria-label="Add" onClick={this.createNewPo}>
+        <AddIcon />
+      </Fab>
+                                
+                            </Row>
+                            <Row style={{marginTop:"50px"}}>
                                 <Notification />
                                 
                             </Row>
@@ -96,6 +127,7 @@ class Home extends Component {
                         </Col>
 
                     </Row>
+                    }
 
                 </Container>
                 {/* <Paper elevation={1}>
@@ -114,7 +146,8 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Home);

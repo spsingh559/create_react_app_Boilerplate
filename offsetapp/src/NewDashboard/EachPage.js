@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import Button from '@material-ui/core/Button';
-import ButtonBB from 'react-bootstrap/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
-import {Container, Row, Col,Pagination,Badge} from 'react-bootstrap';
+import {Pagination} from 'react-bootstrap';
 
 
 
@@ -30,8 +25,15 @@ const styles = theme => ({
 
 class EachPage extends Component {
 
+  state={
+
+  }
+
     yearSelect=()=>{
-        alert(this.props.year);
+        // alert(this.props.year);
+        // this.setState({activeYear:''})
+        this.props.sendYear(this.props.year);
+        // this.setState({activeYear:this.props.year})
     }
     render() {
         const {classes} = this.props;
@@ -40,19 +42,10 @@ class EachPage extends Component {
         return (
         
             <Pagination.Item key={this.props.number} 
-            active={this.props.index === 0}
-            onClick={this.yearSelect}>
+            onClick={this.yearSelect}
+            active={this.props.year===this.props.activeYear}
+            >
             {this.props.year}
-            {/* <br /> */}
-            {/* <Badge pill variant="primary">
-    4
-  </Badge>
-  <Badge pill variant="secondary">
-    5
-  </Badge>
-  <Badge pill variant="success">
-    9
-  </Badge> */}
           </Pagination.Item>
                         
         );
