@@ -5,6 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {Container, Row, Col} from 'react-bootstrap';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import Typography from '@material-ui/core/Typography';
 //  Imported Component
 import CreatedPO from './POCount/createdPO';
 import PendingPO from './POCount/pendingPO';
@@ -35,12 +36,10 @@ const styles = theme => ({
 class Home extends Component {
 
     state={
-        viewDash:false,
-        selectedYear:''
+        selectedYear:2019
     }
 
     sendYear=(year)=>{
-        this.setState({viewDash:true});
         this.setState({selectedYear:year})
         
     }
@@ -64,47 +63,69 @@ class Home extends Component {
 
                 <Container>
                     <Row>
-                        <Col md={12}>
+                    <Col md={2}>
+      <Paper elevation={1} style={{height:"60px", width:"150px"}}> 
+            <center>
+            <Typography variant="h5" component="h3">
+              selected Year
+            </Typography>
+            <Typography component="p">
+            <h6>{this.state.selectedYear}</h6>
+            </Typography>
+            </center>
+          </Paper>
+      </Col>
+                        <Col md={10}>
                         <YearSlider 
                         sendYear={this.sendYear}
                         />
                         </Col>
+                        
                     </Row>
-                    {this.state.viewDash==false?
+                   
                     <Row>
-                        <Col md={12}>
-                       <center> <h2> Select year to view Dashboard</h2></center>
-                        </Col>
-                    </Row>:
-                    <Row>
-                        <Col md={8}>
-                            <Row>
-                                <Col
+                        
+                                <Col xs={3}
                                     style={{
                                     paddingLeft: "0"
                                 }}>
                                     <CreatedPO createPO={createPO}/>
                                 </Col>
-                                <Col>
+                                <Col xs={3}>
                                     <PendingPO/>
 
                                 </Col>
-                                <Col>
+                                <Col xs={3}>
                                     <CompletedPO/>
 
                                 </Col>
+                                <Col xs={3}>
+                           
+                           
+                            <Fab color="primary" aria-label="Add" onClick={this.createNewPo}>
+        <AddIcon />
+      </Fab>
+      </Col>
+     
+      
+                                
                             </Row>
+                          
+                     
+                            
 
                             <Row
                                 style={{
                                 marginTop: "30px"
                             }}>
+                            <Col md={12}>
                                 <Paper elevation={1}>
                                     <POTable/>
                                 </Paper>
+                                </Col>
                             </Row>
 
-                            <Row style={{marginTop:"20px"}}>
+                            {/* <Row style={{marginTop:"20px"}}>
                             <Paper elevation={1}>
                             <POStatus />
                                 </Paper>
@@ -117,6 +138,16 @@ class Home extends Component {
                             <Fab color="primary" aria-label="Add" onClick={this.createNewPo}>
         <AddIcon />
       </Fab>
+      <Paper elevation={1} style={{height:"75px", width:"280px", marginLeft:"20px"}}> 
+            <center>
+            <Typography variant="h5" component="h3">
+              selected Year
+            </Typography>
+            <Typography component="p">
+            <h2>{this.state.selectedYear}</h2>
+            </Typography>
+            </center>
+          </Paper>
                                 
                             </Row>
                             <Row style={{marginTop:"50px"}}>
@@ -126,8 +157,8 @@ class Home extends Component {
 
                         </Col>
 
-                    </Row>
-                    }
+                    </Row> */}
+                    
 
                 </Container>
                 {/* <Paper elevation={1}>

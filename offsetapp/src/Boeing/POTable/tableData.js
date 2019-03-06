@@ -1,51 +1,63 @@
 const tableData=[
     {
         "poNumber":"PO123456",
-        "appID":"app1",
+        "appID":1,
+        "actionOwner":"supplier1@supplier.com",
+        "supplierName":"supplier1",
+        "eiva":2000,
+        "riva":1800,
         "status":"PO Initiated",
-        "deficit":"100",
-        "poIVA":"300",
-        "assignedTo":"supplier1@boeing.com"
+        "deficit":100
     },
     {
         "poNumber":"PO123457",
         "appID":"app2",
         "status":"PO Details Being Entered",
-        "deficit":"50",
-        "poIVA":"200",
-        "assignedTo":"boeing1@boeing.com"
+        "actionOwner":"boeing1@boeing.com",
+        "supplierName":"supplier1",
+        "eiva":2000,
+        "riva":1800,
+        "deficit":100,
     },
     {
         "poNumber":"PO123458",
         "appID":"app3",
         "status":"PO Details Being Verified",
-        "deficit":"50",
-        "poIVA":"150",
-        "assignedTo":"boeing1@boeing.com"
+        "actionOwner":"boeing1@boeing.com",
+        "supplierName":"supplier1",
+        "eiva":2000,
+        "riva":1800,
+        "deficit":100,
     },
     {
         "poNumber":"PO123458",
         "appID":"app4",
         "status":"PO Details Accepted",
-        "deficit":"50",
-        "poIVA":"500",
-        "assignedTo":"supplier1@boeing.com"
+        "actionOwner":"boeing1@boeing.com",
+        "supplierName":"supplier1",
+        "eiva":2000,
+        "riva":1800,
+        "deficit":100,
     },
     {
         "poNumber":"PO123474",
         "appID":"app5",
         "status":"PO Archived",
-        "deficit":"50",
-        "poIVA":"300",
-        "assignedTo":"supplier1@boeing.com"
+        "actionOwner":"boeing1@boeing.com",
+        "supplierName":"supplier1",
+        "eiva":2000,
+        "riva":1800,
+        "deficit":100,
     },
     {
         "poNumber":"PO123453",
         "appID":"app6",
         "status":"END",
-        "deficit":"50",
-        "poIVA":"400",
-        "assignedTo":"supplier1@boeing.com"
+        "actionOwner":"boeing1@boeing.com",
+        "supplierName":"supplier1",
+        "eiva":2000,
+        "riva":1800,
+        "deficit":200,
     }
 
 ]

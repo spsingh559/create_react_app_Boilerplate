@@ -9,6 +9,7 @@ import CreatePO from './Boeing/CreatePO/createPO';
 import * as serviceWorker from './serviceWorker';
 // import NewDashboard from './NewDashboard/NewDashboard';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
+import AddPODetail from './AddPO/poDetails';
 
 
 ReactDOM.render(
@@ -18,6 +19,8 @@ ReactDOM.render(
     <Route path="/boeing" component={ParentComponent}>
     {/* <Route path="/newDashboard" component={NewDashboard} /> */}
     <Route path="/supplier" component={Supplier} />
+    <Route path="/addPODetail/:poNumber" component={AddPODetail} />
+    {/* <Route path="/addPODetail" component={AddPODetail} /> */}
     <Route path="/boeing/createPO/:year" component={CreatePO}/>
     <IndexRoute component={Boeing} />
     </Route>

@@ -99,7 +99,7 @@ console.log(this.state.userId);
         
         <Toolbar>
           <Typography variant="h6" color="inherit">
-            Offset Login
+            Offset Document Management System
           </Typography>
         </Toolbar>
       </AppBar>
@@ -108,9 +108,9 @@ console.log(this.state.userId);
 
    
     <Paper elevation={5} style={{height:"400px", width:"500px", marginTop:"100px"}}>
-    <h3> Offset Authentication System </h3>
+   
     <center>
-    <form className={classes.container} noValidate autoComplete="off">
+    <form className={classes.container} noValidate autoComplete="off" >
     <TextField
           id="standard-dense"
           label="User Id"
@@ -118,6 +118,7 @@ console.log(this.state.userId);
           onChange={this.handleChangeUserId}
           className={classNames(classes.textField, classes.dense)}
           margin="dense"
+          style={{marginTop:"50px"}}
         />
 <br />
 <br />
@@ -133,7 +134,7 @@ console.log(this.state.userId);
         />
 <br />
 <Button variant="contained" color="primary" style={{marginTop:"30px"}} onClick={this.submit}>
-        Submit
+       Login
       </Button>
       <br />
       <br />

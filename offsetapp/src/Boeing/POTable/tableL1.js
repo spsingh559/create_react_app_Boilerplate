@@ -28,19 +28,22 @@ class TableL1 extends Component {
                 />
             )
         })
-
+        
+      
         return(
 
 <Table striped bordered hover responsive className={classes.table}> 
 <thead style={{backgroundColor:"#ccddff"}}>
   <tr>
     <th>PO Number</th>
-    <th>App Id</th>
     <th>Status</th>
+    <th>Action Owner</th>
+    <th>Supplier Name</th>
+    <th>EIVA</th>
+    <th>RIVA</th>   
+    <th>IVA Status</th>
     <th>Deficit</th>
-    <th>Assigned To</th>
-    <th>PO IVA</th>
-    <th>Action</th>
+        <th>Action</th>
   </tr>
 </thead>
 <tbody>

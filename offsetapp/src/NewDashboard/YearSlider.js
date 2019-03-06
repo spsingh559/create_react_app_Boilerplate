@@ -34,7 +34,7 @@ class YearSlider extends Component {
         rightFlag:true,
         nextPointer:0,
         prevPointer:0,
-        activeYear:''
+        activeYear:2019
     }
 
     componentDidMount=()=>{

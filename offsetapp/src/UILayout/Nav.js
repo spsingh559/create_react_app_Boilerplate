@@ -188,7 +188,7 @@ class Nav extends React.Component {
         <ListItem onClick={this.handleClose}>
           <ListItemIcon><InboxIcon />
           </ListItemIcon>
-          <Link to="/"> Pending PO </Link>
+          <Link to="/addPODetail/PO123456"> Pending PO </Link>
         </ListItem>
         <Divider />
         <ListItem onClick={this.handleLogout}>
@@ -215,7 +215,7 @@ class Nav extends React.Component {
              <ListItem onClick={this.handleClose}>
                <ListItemIcon><InboxIcon />
                </ListItemIcon>
-               <Link to="/viewpo"> View PO </Link>
+               <Link to="/addPODetail/2019"> View PO </Link>
              </ListItem>
      
            

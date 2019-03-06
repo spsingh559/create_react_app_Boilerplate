@@ -17,6 +17,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import {Link} from 'react-router';
 const styles = theme => ({
     root: {
       ...theme.mixins.gutters(),
@@ -65,27 +66,34 @@ class TableL2 extends Component {
   }
 
   showPO=()=>{
-this.setState({openDial:true})
+  //  console.log(router);
+  //       router.push('/addPODetail/'+this.props.data.poNumber);
+
   }
   handleCloseDial=()=>{
     this.setState({openDial:false})
   }
     render()    {
+
       let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
         const {classes} = this.props;
+       
+
         const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
+  
         return(
       
       <tr>
-      <td onClick={this.showPO} style={{color:"blue",cursor: "pointer"}}> {this.props.data.poNumber}</td>
-      <td> {this.props.data.appID}</td>
-      <td>{this.props.data.status}</td>
+      <td  style={{color:"blue",cursor: "pointer"}}> <Link to={"/addPODetail/"+this.props.data.poNumber}> {this.props.data.poNumber}</Link></td>
+      <td> {this.props.data.status}</td>
+      <td>{this.props.data.actionOwner}</td>
+      <td>{this.props.data.supplierName}</td>
+      <td>{this.props.data.eiva}</td>
+      <td>{this.props.data.riva}</td>
       <td>{this.props.data.deficit}</td>
-      <td>{this.props.data.assignedTo}</td>
-      <td>{this.props.data.poIVA}</td>
-      <td>
+      <td>{(this.props.data.riva/this.props.data.eiva)*100 +"%"}</td>
+            <td>
       <div>
         <IconButton
           aria-label="More"
