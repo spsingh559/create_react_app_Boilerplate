@@ -3,53 +3,39 @@ import {Container,Row,Col} from 'react-bootstrap';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import TabContainerNew from './AddDetails/TabContainerNew';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
-import Grid from '@material-ui/core/Grid';
-import FileData from './fileData'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import POData from '../Boeing/POTable/tableData';
 
-
-import POTable from './PODetail/POTable';
+import PODetailTable from './PODetailTable/PODetailTable';
 import InvoiceTable from './Invoice/InvoiceTable';
-import Comment from './Comments/Comment';
-import TabView from './AddDetails/TabView';
-import AddDetailsDialog from './AddDetails/AddDetailsDialog';
-
+import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import POAddData from './AddDetails/POAddData/POAddData';
 const POObject = {
     "poNumber":"PO123456",
     "appID":"app1",
     "status":"created",
     "deficit":"100",
     "assignedTo":"supplier1@boeing.com"
+}
+
+const sampleData={
+  
+  invNumber:"INV12",
+    invDate:"12/02/2019",
+    invValue:1000,
+    transDetails:"acct5679065XXX",
+    iva:3900,
+    credit:6678,
+    remarks:"done",
+    selectedFile:"invoice.txt",
+    type:"Invoice"
 }
 
 const styles = theme => ({
@@ -63,13 +49,18 @@ const styles = theme => ({
   },
 });
 
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 class PODetails extends Component {
 
   state = {
     value: 0,
     open: false,
     edit:false,
-    showDialog:false
+    showDialog:false,
+    newPOData:[sampleData]
   };
 
   handleChange = (event, value) => {
@@ -87,6 +78,13 @@ class PODetails extends Component {
     this.setState({ open: false });
   };
 
+  // Function for PO Submit 
+
+  poSubmittedData=(data)=>{
+
+    let newData=[data].concat(this.state.newPOData);
+    this.setState({newPOData:newData, open:false});
+  }
 
   
 
@@ -115,60 +113,71 @@ class PODetails extends Component {
 <br/>
        <Container style={{margintop:"100px"}}>
 
-     <Row>
-       <Col md={12}>
+   
+       
 
               <Row>
                 <Col md={12}>
-                        <POTable/>
+                        <PODetailTable data={POData[0]}/>
                 </Col>               
               </Row>
+              <Row>
+                <div style={{marginTop:"30px", marginLeft:"800px"}}>
 
-              {/* <Row>
-                <Col md="12">
-                    <InvoiceTable/>
-                </Col>
-              </Row>  */}
-                                  
-        </Col>
-        {/* <Col md={4}>
-                            
-            <Comment/>
-                                
-        </Col>  */}
-    </Row>   
-    {/* <Row>
-      
-         <Col md={12}>
-         <TabView/>
-      
-            
-            
-             </Col> 
-    </Row>    */}
-    <Row>
-  <Button variant="contained" color="primary" style={{marginTop:"30px",position:"center"}} onClick={this.handleClickOpen}>
-                                                      PO Transaction History
+               
+              <Button variant="contained" color="primary" style={{marginRight:"20px"}} onClick={this.handleClickOpen} >
+                                                      PO  History
   </Button> 
   
-  <Button variant="contained" color="primary" style={{marginTop:"30px",position:"center"}} onClick={this.handleClickOpen}>
-                                                      Add Details
-  </Button> 
+  <Button variant="contained" color="primary" onClick={this.handleClickOpen} className="pull-right" style={{float: "right"}}>
+                                                      Add PO Details
+  </Button>
+  
+  </div>
+              </Row>
 
-  <Dialog
-    fullScreen={fullScreen}
-    open={this.state.open}
-    onClose={this.handleClose}
-    aria-labelledby="responsive-dialog-title"
-    fullWidth={true}
-    maxWidth='xl'
->
-    <DialogTitle id="responsive-dialog-title">{"Summary Report"}</DialogTitle>
-    <DialogContent>
-      <DialogContentText>
-        Add PO Details
-      </DialogContentText>
-    </DialogContent>
+              <Row>
+                <Col md="12">
+                <Paper>
+                    <InvoiceTable data={this.state.newPOData}/>
+                    </Paper>
+                </Col>
+                
+              </Row> 
+                                  
+   
+    <Row>
+ 
+
+    <Dialog
+          fullScreen
+          open={this.state.open}
+          onClose={this.handleClose}
+          TransitionComponent={Transition}
+        >
+     <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleCloseDial} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+              <Typography variant="h6" color="inherit" className={classes.flex}>
+               Add PO Details
+              </Typography>
+              
+            </Toolbar>
+          </AppBar>
+          <div style={{
+              minHeight:"700px",
+          width: "100%",
+          height: "100%",
+          backgroundColor:"#eeeeee"}}>
+          <center>
+          <Paper elevation={1} style={{height:"500px", width:"600px", marginTop:"100px"}}>
+          <POAddData poSubmittedData={this.poSubmittedData}/>
+          </Paper>
+         
+          </center>
+          </div>
     <DialogActions>
       <Button onClick={this.handleClose} color="primary">
         OK

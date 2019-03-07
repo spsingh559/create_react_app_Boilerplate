@@ -24,7 +24,7 @@ import Paper from '@material-ui/core/Paper';
 //import FileData from 'json!./fileData.json';
 //import FileData from './fileData';
 //registerPlugin(FilePondPluginImagePreview);
-import Form1 from './Form1';
+// import Form1 from './Form1';
 import Table1 from './Table1'
 
 const styles = theme => ({
@@ -107,7 +107,7 @@ console.log(value);
             
              <Paper>
               <Container style={{"padding-top":"30px"}}>
-            <Form1 handleFormSubmit={ this.handleFormSubmit } handleInputChange={ this.handleInputChange } newname={ this.state.name } newdescription={ this.state.description }  handleFileChange ={this.handleFileChange}/>
+            {/* <Form1 handleFormSubmit={ this.handleFormSubmit } handleInputChange={ this.handleInputChange } newname={ this.state.name } newdescription={ this.state.description }  handleFileChange ={this.handleFileChange}/> */}
             </Container>
             <br/>
             <br/>

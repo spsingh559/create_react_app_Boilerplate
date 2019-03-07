@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import Paper from '@material-ui/core/Paper';
-
+import {Table} from 'react-bootstrap';
 
 const POObject = {
     "poNumber":"PO123458",
@@ -35,21 +35,51 @@ const styles = theme => ({
       },
   });
 
-class POTable extends Component {
+class PODetailTable extends Component {
     render()    {
         const { classes } = this.props;
-
+console.log('data in po table', this.props.data);
 return(
     <Paper>
     <AppBar position="static" color="default">
       <Toolbar>
         <Typography variant="h6" color="inherit">
-          PO Details
+         Details of Purchase Order
         </Typography>
       </Toolbar>
     </AppBar>
-    <Container style={{marginTop:"30px"}}>
-        <Row style={{paddingBottom:"10px"}}>
+    <Container style={{marginTop:"10px"}}>
+
+    <Table striped bordered hover responsive className={classes.table}> 
+<thead style={{backgroundColor:"#ccddff"}}>
+  <tr>
+    <th>PO Number</th>
+    <th>Status</th>
+    <th>Action Owner</th>
+    <th>Supplier Name</th>
+    <th>EIVA</th>
+    <th>RIVA</th>   
+    <th>IVA Status</th>
+    <th>Deficit</th>
+      
+  </tr>
+</thead>
+<tbody>
+<tr>
+      <td  > {this.props.data.poNumber}</td>
+      <td> {this.props.data.status}</td>
+      <td>{this.props.data.actionOwner}</td>
+      <td>{this.props.data.supplierName}</td>
+      <td>{this.props.data.eiva}</td>
+      <td>{this.props.data.riva}</td>
+      <td>{this.props.data.deficit}</td>
+      <td>{(this.props.data.riva/this.props.data.eiva)*100 +"%"}</td>
+            
+            </tr>
+  </tbody>
+  </Table>
+    
+        {/* <Row style={{paddingBottom:"10px"}}>
             <Col md={4}>
             <Typography >
                 <b>PO Number </b> - {POObject.poNumber}
@@ -102,7 +132,7 @@ return(
                 <b>IVA Status</b> - {(POObject.riva/POObject.eiva)*100 +'%'}
                 </Typography>
             </Col>
-            </Row>
+            </Row> */}
 
     </Container >
    
@@ -156,9 +186,9 @@ return(
     }
 }
 
-POTable.propTypes = {
+PODetailTable.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
-export default withStyles(styles)(POTable);
+export default withStyles(styles)(PODetailTable);
 

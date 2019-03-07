@@ -10,7 +10,7 @@ import {Table} from 'react-bootstrap';
 
 // imported Component
 
-import EachInvoice from './EachInvoice';
+import EachPaymentProofRow from './EachPaymentProofRow';
 
 
 const styles = theme => ({
@@ -24,7 +24,7 @@ const styles = theme => ({
       },
   });
 
-class InvoiceTable extends Component {
+class PaymentProofTable extends Component {
 
     
 
@@ -35,7 +35,7 @@ class InvoiceTable extends Component {
         console.log('data reached to first child', this.props.data);
         let newData = this.props.data.map((data,i)=>{
             return(
-                <EachInvoice
+                <EachPaymentProofRow
                 key={i}
                 data={data}
                 />
@@ -48,25 +48,27 @@ return(
         <Table striped bordered hover responsive className={classes.table}> 
 <thead style={{backgroundColor:"#ccddff"}}>
   <tr>
-    <th>File Name</th>
+    <th>File Number</th>
     <th>Type</th>
     <th>Attachement </th>
     <th>Action</th>
     
     </tr>
     </thead>
-   
+   <tbody>
+   {newData}
+       </tbody>
   </Table>
-{newData}
+
     </div>
 )
     
     }
 }
 
-InvoiceTable.propTypes = {
+PaymentProofTable.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
-export default withStyles(styles)(InvoiceTable);
+export default withStyles(styles)(PaymentProofTable);
 
