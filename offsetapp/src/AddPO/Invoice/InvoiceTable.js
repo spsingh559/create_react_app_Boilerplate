@@ -42,22 +42,28 @@ class InvoiceTable extends Component {
             )
         })
 
+        const invoiceView=[
+            <Table striped bordered hover responsive className={classes.table} key={10}> 
+            <thead style={{backgroundColor:"#ccddff"}}>
+              <tr>
+                <th>File Name</th>
+                <th>Type</th>
+                <th>Attachement </th>
+                <th>Action</th>
+                
+                </tr>
+                </thead>
+               
+              </Table>,
+              <div key={12}>
+            {newData}
+            </div>
+        ]
+
 
 return(
    <div>
-        <Table striped bordered hover responsive className={classes.table}> 
-<thead style={{backgroundColor:"#ccddff"}}>
-  <tr>
-    <th>File Name</th>
-    <th>Type</th>
-    <th>Attachement </th>
-    <th>Action</th>
-    
-    </tr>
-    </thead>
-   
-  </Table>
-{newData}
+       {invoiceView}
     </div>
 )
     

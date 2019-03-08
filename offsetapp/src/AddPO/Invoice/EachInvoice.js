@@ -17,6 +17,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import ViewModule from '@material-ui/icons/ViewModule';
+
 import {Container,Row,Col} from 'react-bootstrap';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -29,6 +31,9 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import POPaymentProof from './POPaymentProof'
 import PaymentProofTable from './PaymentProofTable/PaymentProofTable'
+import OpenInvoiceView from './OpenInvoiceView';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
 function Transition(props) {
     return <Slide direction="up" {...props} />;
   }
@@ -63,7 +68,8 @@ class EachInvoice extends Component {
     state={
         checkVerify:false,
         open:false,
-        newPOData:[sampleData]
+        newPOData:[sampleData],
+        OpenInvoiceDial:false
     }
 
     handleChange = (event) => {
@@ -79,6 +85,14 @@ class EachInvoice extends Component {
         let newData=[data].concat(this.state.newPOData);
         this.setState({newPOData:newData, open:false});
       }
+
+      showInv=()=>{
+        this.setState({OpenInvoiceDial:true})
+      }
+
+      handleCloseInvoiceView=()=>{
+          this.setState({OpenInvoiceDial:false})
+      }
     render()    {
         const { classes } = this.props;
        
@@ -88,6 +102,9 @@ const action=[
 </IconButton>,
 <IconButton key={2}>
     <Delete />
+</IconButton>,
+<IconButton key={4} onClick={this.showInv}>
+    <ViewModule />
 </IconButton>,
 <FormControlLabel
 key={3}
@@ -104,15 +121,66 @@ key={3}
 ]
 
 const expandedData=[
-<Fab color="primary" aria-label="Add" onClick={this.addSubDoc} key={1}>
-        <AddIcon />
-      </Fab> ,
-      <Row key={2}>
+
+      <Row key={6}>
           <Col md={12}>
           <PaymentProofTable data={this.state.newPOData}/>
           </Col>
           </Row>
+          ,
+          <Fab color="primary" aria-label="Add" onClick={this.addSubDoc} key={5} style={{marginLeft:"50px"}}>
+        <AddIcon />
+      </Fab>,
+            <Dialog
+            fullScreen
+            open={this.state.open}
+            onClose={this.handleClose}
+            TransitionComponent={Transition}
+            key={7}
+          >
+       <AppBar className={classes.appBar}>
+              <Toolbar>
+                <IconButton color="inherit" onClick={this.handleCloseDial} aria-label="Close">
+                  <CloseIcon />
+                </IconButton>
+                <Typography variant="h6" color="inherit" className={classes.flex}>
+                 Add Payment Proofs for Invoice - {this.props.data.invNumber}
+                </Typography>
+                
+              </Toolbar>
+            </AppBar>
+            <div style={{
+                minHeight:"700px",
+            width: "100%",
+            height: "100%",
+            backgroundColor:"#eeeeee"}}>
+            <center>
+            <Paper elevation={1} style={{height:"500px", width:"600px", marginTop:"100px"}}>
+            <POPaymentProof invNumber={this.props.data.invNumber} poSubmittedData={this.poSubmittedData}/>
+            </Paper>
+           
+            </center>
+            </div>
+    </Dialog>,
+     <Dialog
+     open={this.state.OpenInvoiceDial}
+     onClose={this.handleCloseInvoiceView}
+     aria-labelledby="form-dialog-title"
+   >
+     <DialogTitle id="form-dialog-title">Invoice Detail for - {this.props.data.invNumber}</DialogTitle>
+     <DialogContent>
+     <OpenInvoiceView data={this.props.data}/>
+     
+     </DialogContent>
+     <DialogActions>
+       <Button onClick={this.handleCloseInvoiceView} color="primary">
+         Close
+       </Button>
+    </DialogActions>
+   </Dialog>
 ]
+
+
 
 return(
    
@@ -144,45 +212,7 @@ return(
         <ExpansionPanelDetails>
         {expandedData}
        </ExpansionPanelDetails>
-        <Row>
- 
-
-    <Dialog
-          fullScreen
-          open={this.state.open}
-          onClose={this.handleClose}
-          TransitionComponent={Transition}
-        >
-     <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton color="inherit" onClick={this.handleCloseDial} aria-label="Close">
-                <CloseIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" className={classes.flex}>
-               Add Payment Proofs for Invoice - {this.props.data.invNumber}
-              </Typography>
-              
-            </Toolbar>
-          </AppBar>
-          <div style={{
-              minHeight:"700px",
-          width: "100%",
-          height: "100%",
-          backgroundColor:"#eeeeee"}}>
-          <center>
-          <Paper elevation={1} style={{height:"500px", width:"600px", marginTop:"100px"}}>
-          <POPaymentProof invNumber={this.props.data.invNumber} poSubmittedData={this.poSubmittedData}/>
-          </Paper>
-         
-          </center>
-          </div>
-    <DialogActions>
-    
-    </DialogActions>
-</Dialog>
-
-        </Row>
-      </ExpansionPanel>
+       </ExpansionPanel>
 
   
 )

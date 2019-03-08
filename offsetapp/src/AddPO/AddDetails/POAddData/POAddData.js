@@ -83,7 +83,7 @@ class POAdd extends React.Component {
     iva:this.state.iva,
     credit:this.state.credit,
     remarks:this.state.remarks,
-    selectedFile:this.state.selectedFile,
+    selectedFile:this.state.selectedFile.name,
     type:this.state.value
     }
     console.log('poAddedData is', poAddedData);

@@ -109,14 +109,17 @@ class PODetails extends Component {
 </Toolbar>
 
 </AppBar>
-
-<br/>
+{/* <div style={{
+              minHeight:"700px",
+          width: "100%",
+          height: "100%",
+          backgroundColor:"#eeeeee"}}> */}
        <Container style={{margintop:"100px"}}>
 
    
        
 
-              <Row>
+              <Row style={{marginTop:"30px"}}>
                 <Col md={12}>
                         <PODetailTable data={POData[0]}/>
                 </Col>               
@@ -125,7 +128,7 @@ class PODetails extends Component {
                 <div style={{marginTop:"30px", marginLeft:"800px"}}>
 
                
-              <Button variant="contained" color="primary" style={{marginRight:"20px"}} onClick={this.handleClickOpen} >
+              <Button variant="contained" color="primary" style={{marginRight:"20px"}} onClick={this.handleClickOpen} disabled>
                                                       PO  History
   </Button> 
   
@@ -136,7 +139,7 @@ class PODetails extends Component {
   </div>
               </Row>
 
-              <Row>
+              <Row style={{marginTop:"30px"}}>
                 <Col md="12">
                 <Paper>
                     <InvoiceTable data={this.state.newPOData}/>
@@ -190,9 +193,9 @@ class PODetails extends Component {
 
         </Row>
     </Container>
-       
+       </div>
    
-      </div>
+      // </div>
     );
   }
 }
