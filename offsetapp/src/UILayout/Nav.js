@@ -13,15 +13,22 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
-
+import Badge from '@material-ui/core/Badge';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import Home from '@material-ui/icons/Home';
+import Profile from '@material-ui/icons/Face'
+import POIcon from '@material-ui/icons/Assignment';
+import Logout from '@material-ui/icons/PowerSettingsNew'
 import {Link} from 'react-router';
+
+import logo from '../images/boeing_logo_white_lg.png';
+import userIcon from '../images/user.png'
 
 
 
@@ -162,23 +169,29 @@ class Nav extends React.Component {
 
        console.log('inside ', loginData.userName);
     const sideList = (
-        <div>  
-        <img src="./images/user.png" height="50px" width="50px" />
+    
+        <div> 
+          <br/> 
+            <center>
+        <img src={userIcon} height="50px" width="50px" />
         <br />
         {"Hello " +" " + loginData.userName}
+        </center>
          <div  className={classes.list}>
          {loginData.dept=="boeing"?
         <List>
           <ListItem onClick={this.handleClose}>
-          <ListItemIcon><InboxIcon />
+          <ListItemIcon><Home />
           </ListItemIcon>
+          
           <Link to="/boeing"> Home </Link>
+  
         </ListItem>
 
         
 
         <ListItem onClick={this.handleClose}>
-          <ListItemIcon><InboxIcon />
+          <ListItemIcon><Profile />
           </ListItemIcon>
           <Link to="/"> Profile </Link>
         </ListItem>
@@ -186,13 +199,17 @@ class Nav extends React.Component {
        
 
         <ListItem onClick={this.handleClose}>
-          <ListItemIcon><InboxIcon />
+          <ListItemIcon>
+          
+          <POIcon />
           </ListItemIcon>
-          <Link to="/addPODetail/PO123456"> Pending PO </Link>
+       
+          <Link to="/boeing"> View PO </Link>
+        
         </ListItem>
         <Divider />
         <ListItem onClick={this.handleLogout}>
-          <ListItemIcon><InboxIcon />
+          <ListItemIcon><Logout />
           </ListItemIcon>
           <Link to="/login" onClick={this.handleLogout}> Logout </Link>
         </ListItem>
@@ -200,28 +217,28 @@ class Nav extends React.Component {
        </List>:
                <List>
                <ListItem onClick={this.handleClose}>
-               <ListItemIcon><InboxIcon />
+               <ListItemIcon><Home />
                </ListItemIcon>
                <Link to="/supplier"> Home </Link>
              </ListItem>
      
             
-             <ListItem onClick={this.handleClose}>
-               <ListItemIcon><InboxIcon />
+             <ListItem  >
+               <ListItemIcon><Profile />
                </ListItemIcon>
                <Link to="/"> Profile </Link>
              </ListItem>
      
              <ListItem onClick={this.handleClose}>
-               <ListItemIcon><InboxIcon />
+               <ListItemIcon><POIcon />
                </ListItemIcon>
-               <Link to="/addPODetail/2019"> View PO </Link>
+               <Link to="/supplier"> View PO </Link>
              </ListItem>
      
            
              <Divider />
              <ListItem onClick={this.handleLogout}>
-               <ListItemIcon><InboxIcon />
+               <ListItemIcon><Logout />
                </ListItemIcon>
                <Link to="/login"> Logout </Link>
              </ListItem>
@@ -238,15 +255,23 @@ let name ="DC";
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" style={{backgroundColor:"#0038A9"}}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer"  onClick={this.handleDrawerOpen}>
               <MenuIcon />
             </IconButton>
+            {loginData.dept=="boeing"?
+            <a class="navbar-brand"><img src={logo} alt="react-bootstrap" height="30"></img></a>:
+            <a class="navbar-brand"><img src={logo} alt="react-bootstrap" height="30"></img></a>}
+
+               {/* {loginData.dept=="boeing"?
+               <Link to="/boeing"> <img src={logo} alt="react-bootstrap" height="30"></img></Link>:
+           <Link to="/supplier"><img src={logo} alt="react-bootstrap" height="30"></img></Link>} */}
+            
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            Offset App
+            Offset Document Management
             </Typography>
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -257,28 +282,30 @@ let name ="DC";
                   input: classes.inputInput,
                 }}
               />
-            </div>
+            </div> */}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              {"Hello " + loginData.userName}
-              {/* <IconButton color="inherit">
+              <p style={{paddingTop:"10px",paddingBottom:"10px"}}>Hello {loginData.userName}</p>
+               <IconButton color="inherit">
                 <Badge badgeContent={3} color="secondary">
                   <NotificationsIcon />
                 </Badge>
-              </IconButton> */}
-              <IconButton
+              </IconButton> 
+              <img src={userIcon} height="50px" width="50px" />
+              
+              {/* <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
               >
                 <AccountCircle />
-              </IconButton>
+              </IconButton> */}
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
+              {/* <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
                 <MoreIcon />
-              </IconButton>
+              </IconButton> */}
             </div>
           </Toolbar>
         </AppBar>

@@ -89,26 +89,31 @@ class PODetails extends Component {
   
 
   render() {
+    let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
       const { classes } = this.props;
     console.log('ponumber from route is', this.props.params.poNumber);
       const { value } = this.state;
       const { fullScreen } = this.props;
     return (
       <div  >
+        <center>
+        <Typography variant="h6" color="inherit">
+       PO Detail Page
+    </Typography>
+          </center>
       
-      <AppBar position="static">
+      {/* <AppBar position="static">
 
 <Toolbar
     style={{
-    backgroundColor: "black",
-    alignItems: "center"
+    backgroundColor: "#0038A9",
+    alignItems: "center",
+    color:"white"
 }}>
-    <Typography variant="h6" color="inherit">
-       PO Detail Page
-    </Typography>
+    
 </Toolbar>
 
-</AppBar>
+</AppBar> */}
 {/* <div style={{
               minHeight:"700px",
           width: "100%",
@@ -128,13 +133,14 @@ class PODetails extends Component {
                 <div style={{marginTop:"30px", marginLeft:"800px"}}>
 
                
-              <Button variant="contained" color="primary" style={{marginRight:"20px"}} onClick={this.handleClickOpen} disabled>
-                                                      PO  History
-  </Button> 
-  
+              
+  {loginData.dept=="supplier"?
   <Button variant="contained" color="primary" onClick={this.handleClickOpen} className="pull-right" style={{float: "right"}}>
                                                       Add PO Details
-  </Button>
+  </Button>:null}
+  <Button variant="contained" color="primary" style={{marginRight:"20px"}} onClick={this.handleClickOpen} disabled>
+                                                      PO  History
+  </Button> 
   
   </div>
               </Row>

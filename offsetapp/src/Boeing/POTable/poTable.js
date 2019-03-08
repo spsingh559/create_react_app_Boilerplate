@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TableData from './tableData';
+
 import TableL1 from './tableL1';
 const styles = theme => ({
     root: {
@@ -17,7 +17,7 @@ class POTable extends Component {
         const {classes} = this.props;
         return(
             
-            <TableL1 data={TableData}/>
+            <TableL1 data={this.props.data}/>
         )
     
     }

@@ -23,9 +23,9 @@ class PendingPO extends Component {
             <Paper elevation={1} style={{height:"75px"}}>
             <center>
               <Typography variant="h5" component="h3">
-                Pending PO
+                # of Invoices
               </Typography>
-              <Typography component="p">
+              <Typography component="p" color="primary" >
               <h2>10</h2>
               </Typography>
             </center>

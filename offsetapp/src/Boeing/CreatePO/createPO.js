@@ -23,6 +23,11 @@ import SaveIcon from '@material-ui/icons/Save';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import Fab from '@material-ui/core/Fab';
+import Done from '@material-ui/icons/Done';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import TableData from '../POTable/tableData';
 const styles = theme => ({
     root: {
         ...theme
@@ -43,7 +48,7 @@ const styles = theme => ({
     },
     margin: {
       margin: theme.spacing.unit,
-      marginTop:"30px"
+  
     },
     extendedIcon: {
       marginRight: theme.spacing.unit,
@@ -59,7 +64,10 @@ class CreatePO extends Component {
         poNumber:'',
         poOffsetPrice:0,
         poIVA:0,
-        poApplicableYear:this.props.params.year
+        poApplicableYear:2019,
+        recIVA:0,
+        poData:TableData,
+        dialogClose:true
     };
 
     handleDateChange = e => {
@@ -79,11 +87,12 @@ class CreatePO extends Component {
     }
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({openDialog: false});
+     
     };
 
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({openDialog: true});
     };
 
     handleChangepoIVA=(event)=>{
@@ -93,63 +102,55 @@ class CreatePO extends Component {
     handlepoApplicableYear=(event)=>{
         this.setState({poApplicableYear:event.target.value})
     }
-
+    handleChangeporecIVA=(event)=>{
+        this.setState({recIVA: event.target.value}); 
+    }
     submit=()=>{
-      let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
-alert('form submitted successfully');
-      let obj={
-        poNumber : this.state.poNumber,
-        poDate:this.state.selectedDate,
-        poVendor:this.state.vendor,
-        poOffsetPrice:this.state.poOffsetPrice,
-        poIVA:this.state.poIVA,
-        createBy:loginData.userId,
-        timeStamp:new Date()
-      }
-      console.log('data submitted is', obj)
+        let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
+        
+              let obj={
+                poNumber : this.state.poNumber,
+                poDate:this.state.selectedDate,
+                actionOwner:this.state.vendor,
+                poOffsetPrice:this.state.poOffsetPrice,
+                eiva:this.state.poIVA,
+                createBy:loginData.userId,
+                timeStamp:new Date(),
+                poApplicableYear:this.state.selectedYear,
+                riva:this.state.recIVA,
+                "appID":"",
+                "status":"PO Initiated",
+               "supplierName":this.state.vendor,
+                "deficit":this.state.poIVA-this.state.recIVA,
+              }
+        
+
+        
+           // let newData=[obj].concat(this.state.poData);
+            this.props.submit(obj);
+           // this.setState({poData:newData, open:false,dialogClose:false});
+              console.log('data submitted is', obj)
     }
 
     render()
 
     {
         const {classes} = this.props;
-        console.log('year from routing is', this.props.params.year);
+        // console.log('year from routing is', this.props.params.year);
         return (
             <div>
 
-                <AppBar position="static">
-
-                    <Toolbar
-                        style={{
-                        backgroundColor: "black",
-                        alignItems: "center"
-                    }}>
-                        <Typography variant="h6" color="inherit">
-                            Create PO Page
-                        </Typography>
-                    </Toolbar>
-
-                </AppBar>
-<div style={{position: "fixed",
-          width: "100%",
-          height: "100%",
-          zIndex: "-10",
-          backgroundColor:"#eeeeee"}}>
-                <div>
-                    <Container>
-                        <Paper
-                            elevation={1}
-                            style={{
-                            height: "400px",
-                            width: "700px",
-                            marginTop: "30px"
-                        }}>
-                        <center>
-                            <h2>Enter PO Details</h2>
-                            </center>
-                            <form className={classes.container} noValidate autoComplete="off" style={{ marginLeft:"100px" ,marginTop:"30px"}}>
+            
+          <form  noValidate autoComplete="off" style={{marginLeft:"20%",marginTop:"10%",marginRight:"20%"}}>
+              <br/>
+              <center>
+              <Typography variant="h6" color="inherit" className={classes.flex}>
+                PO Details
+              </Typography>
+              </center>
+              <br/>
                                 <Row>
-                                    <Col md={4}>
+                                    <Col md={5}>
                                         <TextField id="standard-dense" label="Enter PO Number" 
                                         value={this.state.poNumber}
                                      onChange={this.handleChangepoNumber}
@@ -160,9 +161,16 @@ alert('form submitted successfully');
                                                 </InputAdornment>
                                             )
                                         }}/>
+
+                                       
+
                                     </Col>
-                                    <Col md={4}>
-                                        <TextField
+                                    <Col md={2}>
+                                        
+                                    </Col>
+
+                                    <Col md={5}>
+                                    <TextField
                                             id="date"
                                             label="PO Date"
                                             type="date"
@@ -178,27 +186,27 @@ alert('form submitted successfully');
                                             )
                                         }}/>
                                     </Col>
-
-                                    <Col md={4}></Col>
                                 </Row>
+                                <br/>
                                 <Row >
-                                    <Col md={4}>
+                                    <Col md={5}>
 
                                         <FormControl className={classes.formControl}>
                                             <InputLabel htmlFor="demo-controlled-open-select">Select Vendor</InputLabel>
                                             <Select
-                                                open={this.state.open}
-                                                onClose={this.handleClose}
-                                                onOpen={this.handleOpen}
+                                                open={this.state.openSelect}
+                                                onClose={this.handleSelectClose}
+                                                onOpen={this.handleSelectOpen}
                                                 value={this.state.vendor}
                                                 onChange={this.handleChange}
+                                                
                                                 InputProps={{
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <AccountCircle/>
-                                                    </InputAdornment>
-                                                )
-                                            }}>
+                                                    startAdornment: (
+                                                        <InputAdornment position="start">
+                                                            <AccountCircle/>
+                                                        </InputAdornment>
+                                                    )
+                                                }}>
                                                 <MenuItem value="">
                                                     <em>None</em>
                                                 </MenuItem>
@@ -206,23 +214,26 @@ alert('form submitted successfully');
                                                 <MenuItem value={"supplier2@supplier.com"}>supplier2@supplier.com</MenuItem>
                                             </Select>
                                         </FormControl>
+                                      
+            
                                     </Col>
-                                    <Col md={4}>
-                                        <TextField id="standard-dense" label="Enter offset Price"
-                                         value={this.state.poOffsetPrice}
-                                     onChange={this.handleChangepoOffsetPrice}
-                                    type="number" className={classNames(classes.textField, classes.dense)} margin="dense" InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <AttachMoney/>
-                                                </InputAdornment>
-                                            )
-                                        }}/>
+                                    <Col md={2}>
+                                   
                                     </Col>
-                                    <Col md={4}></Col>
+                                    <Col md={5}>
+                                    <TextField id="standard-dense" label="PO Applicable Year"
+                                    value={this.state.poApplicableYear}
+                                onChange={this.handlepoApplicableYear}
+                               type="number" className={classNames(classes.textField, classes.dense)} margin="dense" InputProps={{
+                                   startAdornment: (
+                                       <InputAdornment position="start">
+                                           <CalendarToday />
+                                       </InputAdornment>
+                                   )
+                                   }}/></Col>
                                 </Row>
                                 <Row>
-                                    <Col md={4}>
+                                    <Col md={5}>
                                     <TextField id="standard-dense" label="Expected IVA"
                                          value={this.state.poIVA}
                                      onChange={this.handleChangepoIVA}
@@ -234,35 +245,57 @@ alert('form submitted successfully');
                                             )
                                         }}/>
                                     </Col>
-                                    <Col md={4}>
-                                    <TextField id="standard-dense" label="PO Applicable Year"
-                                         value={this.state.poApplicableYear}
-                                     onChange={this.handlepoApplicableYear}
-                                    type="number" className={classNames(classes.textField, classes.dense)} margin="dense" InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <CalendarToday />
-                                            </InputAdornment>
-                                        )
-                                        }}/>
+                                    <Col md={2}>
+                                 
                                     </Col>
-                                    <Col md={4}>
+                                    <Col md={5}>
+                                    <TextField id="standard-dense" label="Received IVA"
+                                    value={this.state.recIVA}
+                                onChange={this.handleChangeporecIVA}
+                               type="number" className={classNames(classes.textField, classes.dense)} margin="dense" InputProps={{
+                                       startAdornment: (
+                                           <InputAdornment position="start">
+                                               <AttachMoney/>
+                                           </InputAdornment>
+                                       )
+                                   }}/>
                                     </Col>
                                 </Row>
-                             
+
+                                {/* <Row>
+                                    <Col md={4}>
+                                 
+                               
+                                    </Col>
+                                    <Col md={4}>
+                                   
+                                    </Col>
+                                    <Col md={4}>
+                                    </Col>
+                                </Row> */}
+                             <br/>
+                             <br/>
                                     <Row>
-                                        <Col>
-                                        <Fab variant="extended" color="primary" aria-label="Add" className={classes.margin} onClick={this.submit}>
-          <SaveIcon className={classes.extendedIcon} />
-      Save
-        </Fab>
+                                       
+                                        <Col md={6}>
+                                            <center>
+                                            <Button variant="contained" color="primary"  className={classes.button} onClick={this.submit} disabled>
+                                                Save
+                                                <SaveIcon className={classes.margin} />
+                                            </Button>
+                                            </center>
+                                       
                                         </Col>
-                                        <Col>
-                                        <Fab variant="extended" color="primary" aria-label="Add" className={classes.margin} onClick={this.submit}>
-          <AddIcon className={classes.extendedIcon} />
-      Submit
-        </Fab>
+                                      
+                                        <Col md={6}>
+                                        <center>
+                                            <Button variant="contained" color="primary"  className={classes.button} onClick={this.submit}>
+                                                Submit
+                                                <Done className={classes.margin} />
+                                            </Button>
+                                            </center>
                                         </Col>
+                                      
                                     </Row>
                                     
         
@@ -270,10 +303,9 @@ alert('form submitted successfully');
                            
 
                             </form>
-                        </Paper>
-                    </Container>
-                </div>
-            </div>
+                           
+                      
+       
             </div>
         )
 

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     root: {
@@ -22,9 +23,13 @@ class CompletedPO extends Component {
             <Paper elevation={1} style={{height:"75px"}}> 
             <center>
             <Typography variant="h5" component="h3">
-              Completed PO
+             # of Accepted PO
+             {/* <Button variant="contained" color="primary" Layoutsize="lg" disabled style={{"border-radius": "70%"}}>
+     8
+      </Button> */}
             </Typography>
-            <Typography component="p">
+            
+            <Typography component="p" color="primary">
             <h2>8</h2>
             </Typography>
             </center>

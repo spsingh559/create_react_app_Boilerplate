@@ -63,17 +63,42 @@ class EachPaymentProofRow extends Component {
   
     render()    {
 
-        let action=[
-            <IconButton key={1}>
-            <EditIcon />
-        </IconButton>,
-        <IconButton key={2}>
-        <Delete />
-    </IconButton>,
-    <IconButton key={4} onClick={this.showInv}>
-    <ViewModule />
+      let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
+
+      let action;
+      {loginData.dept=="supplier"?
+action=[
+  <IconButton key={1}>
+  <EditIcon />
+</IconButton>,
+<IconButton key={2}>
+  <Delete />
+</IconButton>,
+<IconButton key={4} onClick={this.showInv}>
+  <ViewModule />
 </IconButton>
-        ]
+
+]:
+action=[
+
+<IconButton key={4} onClick={this.showInv}>
+<ViewModule />
+</IconButton>
+]}
+
+
+
+//         let action=[
+//             <IconButton key={1}>
+//             <EditIcon />
+//         </IconButton>,
+//         <IconButton key={2}>
+//         <Delete />
+//     </IconButton>,
+//     <IconButton key={4} onClick={this.showInv}>
+//     <ViewModule />
+// </IconButton>
+//         ]
       
         const {classes} = this.props;
        

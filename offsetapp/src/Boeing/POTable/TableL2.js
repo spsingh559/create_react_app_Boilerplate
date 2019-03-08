@@ -6,6 +6,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -18,6 +21,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import {Link} from 'react-router';
+import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
     root: {
       ...theme.mixins.gutters(),
@@ -78,7 +82,7 @@ class TableL2 extends Component {
       let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
         const {classes} = this.props;
        
-
+console.log("Login Data ",loginData);
         const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
   
@@ -91,10 +95,12 @@ class TableL2 extends Component {
       <td>{this.props.data.supplierName}</td>
       <td>{this.props.data.eiva}</td>
       <td>{this.props.data.riva}</td>
-      <td>{this.props.data.deficit}</td>
       <td>{(this.props.data.riva/this.props.data.eiva)*100 +"%"}</td>
+      <td>{this.props.data.eiva-this.props.data.riva}</td>
+     
+      {loginData.dept=="boeing"?
             <td>
-      <div>
+      {/* <div>
         <IconButton
           aria-label="More"
           aria-owns={open ? 'long-menu' : undefined}
@@ -121,9 +127,27 @@ class TableL2 extends Component {
             Archive
             </MenuItem>
         </Menu>
-      </div>
+      </div> */}
+
+      <Grid container spacing={2} alignItems="flex-end">
+          <Grid item>
+              <IconButton className={classes.button} aria-label="Delete">
+                    <DeleteIcon />
+              </IconButton>
+          </Grid>
+          <Grid item>
+              <IconButton className={classes.button} aria-label="Delete">
+                    <EditIcon />
+              </IconButton>                                       
+          </Grid>
+      </Grid>
+     
+      
+
+
              
-      </td>
+      </td>:null}
+
       <Dialog
           fullScreen
           open={this.state.openDial}

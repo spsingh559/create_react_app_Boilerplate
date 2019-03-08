@@ -11,7 +11,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import loginData from './loginData';
-
+import Footer from '../UILayout/footer'
+import {Container,Row,Col} from 'react-bootstrap';
+import logo from '../images/boeing_logo_white_lg.png';
+import Axios from 'axios';
+import restUrl from '../restUrl';
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -55,24 +59,41 @@ class Login extends Component {
     const { router } = this.props;
     // router.push('/')
     let obj={
-      userId:this.state.userId,
+      user_id:this.state.userId,
       password:this.state.password
     }
 
-    console.log('obj', obj);
-
-    loginData.forEach((data)=>{
-      console.log()
-      if(data.userId==obj.userId && data.password==obj.password){
-        
-        sessionStorage.setItem('userLoginDetails',JSON.stringify({userId:data.userId,userName:data.userName,role:data.role,dept:data.dept}));
-        if(data.dept=="boeing"){
+     Axios({
+      method:'post',
+      url:restUrl+'/login',
+      data:obj
+    })
+    .then((data) => {
+     console.log(data)
+      let dept;
+      if(data.data.code==200){
+        if(data.data.dept=="BCA" || data.data.dept=="BDS"){
+          dept="boeing"
+        }else{
+          dept="supplier"
+        }
+        sessionStorage.setItem('userLoginDetails',JSON.stringify({userId:data.data.user_id,userName:data.data.user_name,role:data.data.role,dept:dept}));
+            if(dept=="boeing"){
         router.push('/boeing')
         }else{
           router.push('/supplier')
         }
+       
+      }else{
+        alert('login Failed');
       }
+  
     })
+    .catch((error) => {
+      alert('Network Error, Try Again');
+      console.log(error);
+      console.log(error+"error in Login data for post");
+});
 
     console.log('data rec', obj);
 
@@ -94,21 +115,28 @@ console.log(this.state.userId);
 
     return (
       <div className="Loginbackground">
-   
-     <AppBar position="static">
+ 
+         <AppBar position="static">
         
         <Toolbar>
+        <a href="/" class="navbar-brand"><img src={logo} alt="react-bootstrap" height="30"></img></a>
           <Typography variant="h6" color="inherit">
             Offset Document Management System
           </Typography>
         </Toolbar>
       </AppBar>
+
+     
+     
+    
   
      <center>
+       
 
    
     <Paper elevation={5} style={{height:"400px", width:"500px", marginTop:"100px"}}>
-   
+      <br/>
+    <h4>LOGIN</h4>
     <center>
     <form className={classes.container} noValidate autoComplete="off" >
     <TextField
@@ -133,9 +161,25 @@ console.log(this.state.userId);
           margin="normal"
         />
 <br />
-<Button variant="contained" color="primary" style={{marginTop:"30px"}} onClick={this.submit}>
+<br/>
+<Container>
+<Row>
+  <Col>
+  <div>
+<Button variant="contained" color="primary" Layoutsize="lg" disabled block style={{"min-width":"200px"}}>
+       Forgot Password?
+      </Button>
+      </div>
+      </Col>
+      <Col>
+      <div>
+<Button variant="contained" color="primary"  Layoutsize="lg" block  onClick={this.submit} style={{"min-width":"200px"}}>
        Login
       </Button>
+      </div>
+      </Col>
+      </Row>
+      </Container>
       <br />
       <br />
       <br />
@@ -144,10 +188,13 @@ console.log(this.state.userId);
         </Paper>
     
     </center>
+    <video id="createNetwork" loop autoPlay>
+              <source src="https://youtu.be/02VX-wmepAA" type="video/mp4" />
+</video> 
+  <Footer/>
+  </div>   
   
-  
-      </div>
-     
+      
     );
   }
 }

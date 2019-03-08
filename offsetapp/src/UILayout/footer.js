@@ -1,15 +1,17 @@
 import React from 'react';
+import Copyright from '@material-ui/icons/Copyright';
 
 const style = {
-    backgroundColor: 'black',
+    backgroundColor: '#0038A9',
     borderTop: "1px solid #E7E7E7",
     textAlign: "center",
-    padding: "20px",
+    padding: "5px",
     position: "fixed",
     left: "0",
     bottom: "0",
     height: "30px",
     width: "100%",
+    color: "white"
 };
 
 const phantom = {
@@ -27,6 +29,7 @@ export default class Footer extends React.Component{
 			<div>
                 <div style={phantom} />
                 <div style={style}>
+                    <p><Copyright/> 2019 Boeing India Private Limited</p>
                 </div>
             </div>
 			);

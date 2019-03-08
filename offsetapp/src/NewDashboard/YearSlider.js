@@ -23,8 +23,9 @@ const styles = theme => ({
       backgroundColor:"#eeeeee",
       marginTop:"100px"
     }
+
 });
-let year=[2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990];
+let year=[2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990];
 class YearSlider extends Component {
 
     state={
@@ -40,32 +41,32 @@ class YearSlider extends Component {
     componentDidMount=()=>{
       
         
-        let newYear=year.slice(0,10)
+        let newYear=year.slice(0,11)
         this.setState({
             yearData:newYear,
             leftFlag:false,
             rightFlag:true,
-            nextPointer:10,
+            nextPointer:11,
             prevPointer:0
         })
 
     }
    
     prev=()=>{
- let newYear=year.slice(this.state.prevPointer-10, this.state.prevPointer);
+ let newYear=year.slice(this.state.prevPointer-11, this.state.prevPointer);
  this.setState({
             yearData:newYear,
-            nextPointer:this.state.nextPointer-10,
-            prevPointer:this.state.prevPointer-10
+            nextPointer:this.state.nextPointer-11,
+            prevPointer:this.state.prevPointer-11
         })
     }
     next=()=>{
 
-        let newYear=year.slice(this.state.nextPointer, this.state.nextPointer+10);
+        let newYear=year.slice(this.state.nextPointer, this.state.nextPointer+11);
  this.setState({
             yearData:newYear,
-            nextPointer:this.state.nextPointer+10,
-            prevPointer:this.state.prevPointer+10
+            nextPointer:this.state.nextPointer+11,
+            prevPointer:this.state.prevPointer+11
         })
         
        

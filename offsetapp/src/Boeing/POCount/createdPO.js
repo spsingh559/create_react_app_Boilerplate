@@ -22,9 +22,9 @@ class CreatedPO extends Component {
             <Paper elevation={1} style={{height:"75px", paddingLeft:"20px"}} square={false}>
                         <center>
                           <Typography variant="h5" component="h3">
-                            Created PO
+                            {this.props.heading}
                           </Typography>
-                          <Typography component="p">
+                          <Typography component="p" color="primary">
                           <h2>{this.props.createPO}</h2>
                           </Typography>
                         </center>

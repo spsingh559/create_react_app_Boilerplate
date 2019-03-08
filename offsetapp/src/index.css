@@ -12,3 +12,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.page-item.active .page-link{
+  z-index: 1;
+  color: #fff;
+  background-color: #0038A9;
+  border-color: #0038A9;
+}

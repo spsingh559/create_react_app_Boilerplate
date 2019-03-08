@@ -44,7 +44,7 @@ class InvoiceTable extends Component {
 
         const invoiceView=[
             <Table striped bordered hover responsive className={classes.table} key={10}> 
-            <thead style={{backgroundColor:"#ccddff"}}>
+            <thead style={{backgroundColor:"#0038A9",color:"white"}}>
               <tr>
                 <th>File Name</th>
                 <th>Type</th>

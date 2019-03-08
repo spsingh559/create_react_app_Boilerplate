@@ -41,7 +41,7 @@ class PODetailTable extends Component {
 console.log('data in po table', this.props.data);
 return(
     <Paper>
-    <AppBar position="static" color="default">
+    <AppBar position="static" color="default" style={{backgroundColor:"#0038A9",color:"white"}}>
       <Toolbar>
         <Typography variant="h6" color="inherit">
          Details of Purchase Order

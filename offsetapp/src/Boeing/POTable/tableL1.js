@@ -10,12 +10,13 @@ const styles = theme => ({
       paddingBottom: theme.spacing.unit * 2,
     },
     table: {
-        minWidth: 745,
+        minWidth: "800px",
       },
   });
 
 class TableL1 extends Component {
     render()    {
+        let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
 
         const {classes} = this.props;
 
@@ -33,7 +34,7 @@ class TableL1 extends Component {
         return(
 
 <Table striped bordered hover responsive className={classes.table}> 
-<thead style={{backgroundColor:"#ccddff"}}>
+<thead style={{backgroundColor:"#0038A9",color:"white","text-align": "center"}}>
   <tr>
     <th>PO Number</th>
     <th>Status</th>
@@ -42,8 +43,9 @@ class TableL1 extends Component {
     <th>EIVA</th>
     <th>RIVA</th>   
     <th>IVA Status</th>
-    <th>Deficit</th>
-        <th>Action</th>
+    <th>DIVA</th>
+    {loginData.dept=="boeing"?
+        <th>Action</th>:null}
   </tr>
 </thead>
 <tbody>
