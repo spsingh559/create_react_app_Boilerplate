@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Table} from 'react-bootstrap';
 
+
+
 // imported Component
 
 import EachInvoice from './EachInvoice';
@@ -63,7 +65,7 @@ class InvoiceTable extends Component {
 
 return(
    <div>
-       {invoiceView}
+       {newData}
     </div>
 )
     

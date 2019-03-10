@@ -45,6 +45,7 @@ import AttachMoney from '@material-ui/icons/AttachMoney';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import classNames from 'classnames';
 
+import '../AddPO/PO.css';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
@@ -204,11 +205,7 @@ class Home extends Component {
    
         let createPO = 10;
         return (
-          <div style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor:"#eeeeee",
-          position:"absolute"}}>
+          <div className="POBackground">
 
             <div style={{ marginTop: "10px"}}>
 

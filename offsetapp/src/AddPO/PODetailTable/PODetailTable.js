@@ -30,9 +30,6 @@ const styles = theme => ({
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
     },
-    table: {
-        minWidth: 745,
-      },
   });
 
 class PODetailTable extends Component {
@@ -50,8 +47,8 @@ return(
     </AppBar>
     <Container style={{marginTop:"10px"}}>
 
-    <Table striped bordered hover responsive className={classes.table}> 
-<thead style={{backgroundColor:"#ccddff"}}>
+    <Table striped bordered hover responsive> 
+<thead style={{backgroundColor:"#0038A9",color:"white","text-align": "center"}}>
   <tr>
     <th>PO Number</th>
     <th>Status</th>

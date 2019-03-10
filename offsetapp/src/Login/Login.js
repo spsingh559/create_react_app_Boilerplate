@@ -49,10 +49,10 @@ class Login extends Component {
     });
   };
 
-  componentDidMount=()=>{
-    let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
-    console.log('loginData in login page', loginData);
-  }
+  // componentDidMount=()=>{
+  //   let loginData=JSON.parse(sessionStorage.getItem("userLoginDetails"));
+  //   console.log('loginData in login page', loginData);
+  // }
 
   
   submit=()=>{
@@ -73,13 +73,13 @@ class Login extends Component {
       let dept;
       if(data.data.code==200){
         if(data.data.dept=="BCA" || data.data.dept=="BDS"){
-          dept="boeing"
+          dept="supplier"
         }else{
           dept="supplier"
         }
         sessionStorage.setItem('userLoginDetails',JSON.stringify({userId:data.data.user_id,userName:data.data.user_name,role:data.data.role,dept:dept}));
             if(dept=="boeing"){
-        router.push('/boeing')
+        router.push('/supplier')
         }else{
           router.push('/supplier')
         }

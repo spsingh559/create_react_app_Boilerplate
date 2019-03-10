@@ -17,6 +17,7 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import POAddData from './AddDetails/POAddData/POAddData';
+import './PO.css';
 const POObject = {
     "poNumber":"PO123456",
     "appID":"app1",
@@ -95,9 +96,9 @@ class PODetails extends Component {
       const { value } = this.state;
       const { fullScreen } = this.props;
     return (
-      <div  >
+      <div  className="POBackground">
         <center>
-        <Typography variant="h6" color="inherit">
+        <Typography variant="h6" color="inherit" style={{color:"white"}}>
        PO Detail Page
     </Typography>
           </center>
@@ -147,9 +148,9 @@ class PODetails extends Component {
 
               <Row style={{marginTop:"30px"}}>
                 <Col md="12">
-                <Paper>
+                
                     <InvoiceTable data={this.state.newPOData}/>
-                    </Paper>
+                
                 </Col>
                 
               </Row> 

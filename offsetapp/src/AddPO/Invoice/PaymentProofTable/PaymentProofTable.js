@@ -19,9 +19,6 @@ const styles = theme => ({
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
     },
-    table: {
-        minWidth: 745,
-      },
   });
 
 class PaymentProofTable extends Component {
@@ -45,8 +42,8 @@ class PaymentProofTable extends Component {
 
 return(
    <div>
-        <Table striped bordered hover responsive className={classes.table}> 
-<thead style={{backgroundColor:"#ccddff"}}>
+        <Table striped bordered hover responsive > 
+<thead style={{backgroundColor:"#0038A9",color:"white","text-align": "center"}}>
   <tr>
     <th>File Number</th>
     <th>Type</th>
